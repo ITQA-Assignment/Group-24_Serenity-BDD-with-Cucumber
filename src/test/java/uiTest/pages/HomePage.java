@@ -1,24 +1,31 @@
 package uiTest.pages;
 
 import net.serenitybdd.annotations.Step;
-import starter.implementations.homePageImplement;
+import uiTest.helpers.TestHelper;
+import uiTest.pageObjects.HomePageObject;
 
 public class HomePage {
 
-    homePageImplement homepage;
+    HomePageObject homePageObject;
 
     @Step
-    public void openApplication(){
-        homepage.open();
+    public void openApplication() {
+        homePageObject.open();
+        this.verifyHomePage();
     }
 
     @Step
-    public void clickAccount(){
-        homepage.clickAccount();
+    public void verifyHomePage() {
+        homePageObject.verifyHomePage();
     }
 
     @Step
-    public void selectLogin(){
-        homepage.selectLogin();
+    public void verifyHomePageAfterSignIn() {
+        homePageObject.verifyHomePageAfterSignIn();
+    }
+
+    @Step
+    public void clickSignIn() {
+        homePageObject.clickSignIn();
     }
 }
