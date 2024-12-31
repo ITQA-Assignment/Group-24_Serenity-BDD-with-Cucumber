@@ -1,7 +1,7 @@
 package uiTest.pages;
 
 import net.serenitybdd.annotations.Step;
-import uiTest.helpers.TestHelper;
+import uiTest.helpers.PageNavigator;
 import uiTest.pageObjects.HomePageObject;
 
 public class HomePage {
@@ -20,9 +20,7 @@ public class HomePage {
     }
 
     @Step
-    public void verifyHomePageAfterSignIn() {
-        homePageObject.verifyHomePageAfterSignIn();
-    }
+    public void verifyHomePageAfterSignIn() { homePageObject.verifyHomePageAfterSignIn(); }
 
     @Step
     public void clickSignIn() {
