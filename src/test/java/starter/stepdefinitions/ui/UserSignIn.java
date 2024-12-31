@@ -13,9 +13,7 @@ public class UserSignIn {
     SignInPage signInPage;
 
     @Given("User in the homepage")
-    public void user_in_the_homepage() {
-        homePage.openApplication();
-    }
+    public void user_in_the_homepage() { homePage.openApplication(); }
 
     @When("User click sign in tab")
     public void user_click_sign_in_tab() {

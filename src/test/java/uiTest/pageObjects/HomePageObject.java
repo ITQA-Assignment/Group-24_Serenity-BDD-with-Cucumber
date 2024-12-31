@@ -16,7 +16,9 @@ public class HomePageObject extends PageObject {
     public void verifyHomePage() {
 
         testHelper.switchToIFrame("framelive");
+
         WebElement element = testHelper.findElementUsingSelector("#wrapper > div > nav > ol > li > span");
+
         String breadcrumbItem = (String) ((JavascriptExecutor) getDriver())
                 .executeScript("return arguments[0].textContent", element);
 
