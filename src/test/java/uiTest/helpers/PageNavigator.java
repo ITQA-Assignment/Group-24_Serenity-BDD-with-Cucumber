@@ -6,41 +6,45 @@ import uiTest.pageObjects.HomePageObject;
 
 public class PageNavigator {
 
-    HomePageObject homePageObject;
+    HomePageObject homePageObject = new HomePageObject();
     TestHelper testHelper;
 
-    public void PageNavigator(WebDriver webDriver){
+    public PageNavigator(){
+        WebDriver webDriver = null;
         testHelper = TestHelper.getInstance(webDriver);
     }
 
     public void navigateToHomePage(){
-        WebElement element = testHelper.findElementUsingSelector("   #_desktop_logo > h1 > a");
-        element.click();
+        testHelper.findElementUsingId("_desktop_logo").click();
         homePageObject.verifyHomePageAfterSignIn();
     }
 
     public void navigateToMultiOptionItemPage(){
         this.navigateToHomePage();
-
+        testHelper.findElementUsingSelector("#category-3 > a").click();
+        testHelper.findElementUsingSelector("#js-product-list > div.products.row > div:nth-child(1) > article > div > div.thumbnail-top > a").click();
     }
 
     public void navigateToHomeAccessoriesPage(){
         this.navigateToHomePage();
-
+        testHelper.findElementUsingSelector("#category-6 > a").click();
+        testHelper.findElementUsingSelector("#subcategories > ul > li:nth-child(2) > div.subcategory-image > a").click();
     }
 
     public void navigateToMyWishListsPage(){
         this.navigateToHomePage();
-
+        this.navigateToYourAccountPage();
+        testHelper.findElementUsingSelector("#wishlist-link").click();
     }
 
     public void navigateToSingleOptionItemPage(){
         this.navigateToHomePage();
-
+        testHelper.findElementUsingSelector("#category-6 > a").click();
+        testHelper.findElementUsingSelector("#js-product-list > div.products.row > div:nth-child(7) > article > div > div.thumbnail-top > a").click();
     }
 
     public void navigateToYourAccountPage(){
         this.navigateToHomePage();
-
+        testHelper.findElementUsingSelector("#_desktop_user_info > div > a.account").click();
     }
 }
