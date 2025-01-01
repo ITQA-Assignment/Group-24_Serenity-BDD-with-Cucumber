@@ -1,10 +1,10 @@
-Feature: User sign in
+Feature: User Sign In
 
-  Scenario: Sign in with the valid credentials
-    Given User in the homepage
-    When User click sign in tab
-    Then User should navigate to sign in page
-    When User enter email "pub@prestashop.com"
-    And User enter password "123456789"
-    And User click sign in button
-    Then User login to the application
+  Scenario: Sign In with the Valid Credentials
+    Given user in the homepage
+    When user click sign in tab
+    Then user should navigate to sign in page
+    When user enter email "pub@prestashop.com"
+    And user enter password "123456789"
+    And user click sign in button
+    Then user login to the application
