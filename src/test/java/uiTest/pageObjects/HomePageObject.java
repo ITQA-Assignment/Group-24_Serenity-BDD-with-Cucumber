@@ -2,9 +2,15 @@ package uiTest.pageObjects;
 
 import net.serenitybdd.core.pages.PageObject;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import uiTest.helpers.TestHelper;
+
+import java.time.Duration;
+
 
 public class HomePageObject extends PageObject {
     private TestHelper testHelper;
@@ -41,4 +47,14 @@ public class HomePageObject extends PageObject {
         WebElement signInButton = testHelper.findElementUsingXpath("//*[@id=\"_desktop_user_info\"]/div/a");
         signInButton.click();
     }
+
+    public void clickContactUs() {
+        testHelper.switchToIFrame("framelive");
+        $(By.id("contact-link")).click();
+//        WebElement contactUsButton = testHelper.findElementUsingXpath("//*[@id=\"contact-link\"]/a");
+//      contactUsButton.click();
+    }
+
+
+
 }
