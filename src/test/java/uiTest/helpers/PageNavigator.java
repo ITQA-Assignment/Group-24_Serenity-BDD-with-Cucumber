@@ -43,6 +43,7 @@ public class PageNavigator {
         testHelper.findElementUsingSelector("#js-product-list > div.products.row > div:nth-child(7) > article > div > div.thumbnail-top > a").click();
     }
 
+
     public void navigateToYourAccountPage(){
         this.navigateToHomePage();
         testHelper.findElementUsingSelector("#_desktop_user_info > div > a.account").click();

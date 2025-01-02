@@ -6,6 +6,7 @@ import uiTest.pageObjects.HomePageObject;
 
 public class HomePage {
 
+    public Object clickProduct;
     HomePageObject homePageObject;
 
     @Step
@@ -26,4 +27,10 @@ public class HomePage {
     public void clickSignIn() {
         homePageObject.clickSignIn();
     }
+
+    @Step
+    public void clickProduct() {
+        homePageObject.clickProduct();
+    }
+
 }

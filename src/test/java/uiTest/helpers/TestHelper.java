@@ -8,7 +8,7 @@ public class TestHelper {
 
     private static TestHelper instance;
     private final WebDriver driver;
-    private final FluentWait<WebDriver> fluentWait;
+    public final FluentWait<WebDriver> fluentWait;
     private static final int ELEMENT_WAIT_TIMEOUT = 20;
     private WebElement iframe;
 
