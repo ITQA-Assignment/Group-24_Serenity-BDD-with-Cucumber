@@ -19,7 +19,7 @@ public class PageNavigator {
         homePageObject.verifyHomePageAfterSignIn();
     }
 
-    public void navigateToMultiOptionItemPage(){
+    public void navigateToMultiOptionProductPage(){
         this.navigateToHomePage();
         testHelper.findElementUsingSelector("#category-3 > a").click();
         testHelper.findElementUsingSelector("#js-product-list > div.products.row > div:nth-child(1) > article > div > div.thumbnail-top > a").click();
