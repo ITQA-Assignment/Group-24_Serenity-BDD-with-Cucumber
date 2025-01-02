@@ -6,12 +6,21 @@ import uiTest.pageObjects.HomePageObject;
 
 public class PageNavigator {
 
-    HomePageObject homePageObject = new HomePageObject();
-    TestHelper testHelper;
+    private static PageNavigator instance;
+    private final HomePageObject homePageObject;
+    private final TestHelper testHelper;
 
-    public PageNavigator(){
+    private PageNavigator(){
         WebDriver webDriver = null;
+        homePageObject = new HomePageObject();
         testHelper = TestHelper.getInstance(webDriver);
+    }
+
+    public static PageNavigator getInstance() {
+        if (instance == null) {
+            instance = new PageNavigator();
+        }
+        return instance;
     }
 
     public void navigateToHomePage(){
