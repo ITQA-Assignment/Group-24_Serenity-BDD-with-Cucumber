@@ -41,4 +41,12 @@ public class HomePageObject extends PageObject {
         WebElement signInButton = testHelper.findElementUsingXpath("//*[@id=\"_desktop_user_info\"]/div/a");
         signInButton.click();
     }
+
+    public void clickProduct() {
+        testHelper.switchToIFrame("framelive");
+        WebElement clickProduct = testHelper.findElementUsingXpath("//*[@id=\"content\"]/section[1]/div/div[1]/article/div/div[1]/a");
+        clickProduct.click();
+    }
+
+
 }

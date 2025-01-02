@@ -8,4 +8,6 @@ public class SingleOptionProductPageObject extends PageObject {
     public SingleOptionProductPageObject() {
         this.testHelper = TestHelper.getInstance(getDriver());
     }
+
+
 }
