@@ -6,8 +6,8 @@ import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import uiTest.helpers.TestHelper;
 import org.openqa.selenium.WebElement;
-
 import static org.junit.Assert.assertTrue;
+
 
 public class MultiOptionProductPageObject extends PageObject {
     private TestHelper testHelper;
@@ -33,7 +33,7 @@ public class MultiOptionProductPageObject extends PageObject {
     // Verifies that the user is on the Multi Option Product Page
     public void verifyMultiOptionProductPage(){
         testHelper.switchToIFrame("framelive");
-        WebElement element = testHelper.findElementUsingSelector("#main > div.row.product-container.js-product-container");
+        WebElement element = testHelper.findElementUsingSelector("#add-to-cart-or-refresh > div.product-variants.js-product-variants > div");
         Assert.assertNotNull(element);
     }
 
@@ -44,8 +44,10 @@ public class MultiOptionProductPageObject extends PageObject {
 
     //Verifies that the user is on the Write Your Review Modal
     public void verifyWriteYourReviewModal(){
-        WebElement element = testHelper.findElementUsingSelector("#post-product-comment-modal > div > div");
-        Assert.assertNotNull(element);
+        WebElement element = testHelper.findElementUsingId("post-product-comment-modal");
+        String displayStyle = element.getCssValue("display").trim();
+
+        Assert.assertEquals("The Write Your Review modal is not displayed.", "block", displayStyle);
     }
 
     // Clear the Title field
@@ -89,7 +91,6 @@ public class MultiOptionProductPageObject extends PageObject {
         assertTrue("Title field is not highlighted in red.", isTitleHighlighted);
     }
 
-
     // Verifies that the user fills the title field
     public void fillTitleField(String title) {
         getTitleField().sendKeys(title);
@@ -100,15 +101,8 @@ public class MultiOptionProductPageObject extends PageObject {
         getReviewField().sendKeys(review);
     }
 
-    public void verifyReviewSentModalDisplayed(){
-        WebElement element = testHelper.findElementUsingSelector("#product-comment-posted-modal > div > div");
-        Assert.assertNotNull(element);
-    }
-
     // Verifies that the "Review Sent" message is displayed
     public void verifyReviewSentMessageDisplayed() {
-        verifyReviewSentModalDisplayed();
-
         WebElement element = testHelper.findElementUsingSelector("#product-comment-posted-modal > div > div > div.modal-header > p");
         String modalHeaderText = (String) ((JavascriptExecutor) getDriver())
                 .executeScript("return arguments[0].textContent", element);
@@ -118,8 +112,6 @@ public class MultiOptionProductPageObject extends PageObject {
 
     // Verifies that the "Review Sent" message is closed
     public void verifyReviewSentMessageClosed() {
-        verifyReviewSentModalDisplayed();
-
         testHelper.findElementUsingSelector("#product-comment-posted-modal > div > div > div.modal-body > div.post-comment-buttons > button").click();
     }
 
