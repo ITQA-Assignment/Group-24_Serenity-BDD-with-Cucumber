@@ -123,9 +123,4 @@ public class MultiOptionProductPageObject extends PageObject {
         testHelper.findElementUsingSelector("#product-comment-posted-modal > div > div > div.modal-body > div.post-comment-buttons > button").click();
     }
 
-
-
-
-
-
 }
