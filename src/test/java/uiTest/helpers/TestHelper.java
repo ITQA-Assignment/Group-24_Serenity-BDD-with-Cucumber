@@ -3,6 +3,8 @@ package uiTest.helpers;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.FluentWait;
 import java.time.Duration;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TestHelper {
 
@@ -86,6 +88,18 @@ public class TestHelper {
                 throw new RuntimeException("Failed to find element: " + cssSelector, e);
             }
         });
+    }
+
+    public double priceExtractor(String price){
+        price = price.replaceAll("[^\\d.,]", "").trim();
+        Pattern pattern = Pattern.compile("\\d{1,3}(?:,\\d{3})*(\\.\\d+)?");
+        Matcher matcher = pattern.matcher(price);
+        if (matcher.find()) {
+            String value = matcher.group();
+            return Double.parseDouble(value);
+        } else {
+            throw new IllegalStateException("No match found in the price string: " + price);
+        }
     }
 
 }
