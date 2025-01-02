@@ -1,15 +1,19 @@
 package uiTest.pages;
 
 import net.serenitybdd.annotations.Step;
+import uiTest.helpers.PageNavigator;
 import uiTest.pageObjects.MultiOptionProductPageObject;
 
 public class MultiOptionProductPage {
 
     MultiOptionProductPageObject multiOptionProductPageObject;
 
+    PageNavigator navigator;
+
     @Step
     public void verifyMultiOptionProductPage(){
-
+        navigator = PageNavigator.getInstance();
+        navigator.navigateToMultiOptionProductPage();
         multiOptionProductPageObject.verifyMultiOptionProductPage();
     }
 
@@ -58,6 +62,12 @@ public class MultiOptionProductPage {
         multiOptionProductPageObject.fillReviewField(review);
     }
 
+    public void verifyReviewSentMessageDisplayed(){
+        multiOptionProductPageObject.verifyReviewSentMessageDisplayed();
+    }
 
+    public void verifyReviewSentMessageClosed(){
+        multiOptionProductPageObject.verifyReviewSentMessageClosed();
+    }
 
 }

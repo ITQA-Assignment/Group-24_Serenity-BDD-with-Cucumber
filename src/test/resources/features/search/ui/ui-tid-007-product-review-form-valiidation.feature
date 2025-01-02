@@ -22,5 +22,6 @@ Feature: Product Review Form Validation
     And user fills both the title and review fields
     And user clicks send button
     Then review sent message is displayed
+    And user clicks ok button to close the review sent message
 
 

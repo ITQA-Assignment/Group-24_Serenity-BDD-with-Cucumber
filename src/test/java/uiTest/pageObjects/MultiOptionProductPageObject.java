@@ -3,11 +3,18 @@ package uiTest.pageObjects;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import uiTest.helpers.TestHelper;
 import org.openqa.selenium.WebElement;
 
+import static org.junit.Assert.assertTrue;
+
 public class MultiOptionProductPageObject extends PageObject {
     private TestHelper testHelper;
+
+    public MultiOptionProductPageObject() {
+        this.testHelper = TestHelper.getInstance(getDriver());
+    }
 
     @FindBy(id = "comment_title")
     private WebElement titleField;
@@ -21,10 +28,6 @@ public class MultiOptionProductPageObject extends PageObject {
 
     public WebElement getReviewField() {
         return reviewField;
-    }
-
-    public MultiOptionProductPageObject() {
-        this.testHelper = TestHelper.getInstance(getDriver());
     }
 
     // Verifies that the user is on the Multi Option Product Page
@@ -69,21 +72,21 @@ public class MultiOptionProductPageObject extends PageObject {
         boolean isTitleHighlighted = isFieldsHighlighted(getTitleField());
         boolean isReviewHighlighted = isFieldsHighlighted(getReviewField());
 
-        Assert.assertTrue("Title field is not highlighted in red.", isTitleHighlighted);
-        Assert.assertTrue("Review field is not highlighted in red.", isReviewHighlighted);
+        assertTrue("Title field is not highlighted in red.", isTitleHighlighted);
+        assertTrue("Review field is not highlighted in red.", isReviewHighlighted);
     }
 
     // Verifies that the review field is highlighted in red
     public void verifyReviewFieldHighlighted() {
         boolean isReviewHighlighted = isFieldsHighlighted(getReviewField());
 
-        Assert.assertTrue("Review field is not highlighted in red.", isReviewHighlighted);
+        assertTrue("Review field is not highlighted in red.", isReviewHighlighted);
     }
 
     // Verifies that the title field is highlighted in red
     public void verifyTitleFieldHighlighted() {
         boolean isTitleHighlighted = isFieldsHighlighted(getTitleField());
-        Assert.assertTrue("Title field is not highlighted in red.", isTitleHighlighted);
+        assertTrue("Title field is not highlighted in red.", isTitleHighlighted);
     }
 
 
@@ -97,7 +100,28 @@ public class MultiOptionProductPageObject extends PageObject {
         getReviewField().sendKeys(review);
     }
 
+    public void verifyReviewSentModalDisplayed(){
+        WebElement element = testHelper.findElementUsingSelector("#product-comment-posted-modal > div > div");
+        Assert.assertNotNull(element);
+    }
+
     // Verifies that the "Review Sent" message is displayed
+    public void verifyReviewSentMessageDisplayed() {
+        verifyReviewSentModalDisplayed();
+
+        WebElement element = testHelper.findElementUsingSelector("#product-comment-posted-modal > div > div > div.modal-header > p");
+        String modalHeaderText = (String) ((JavascriptExecutor) getDriver())
+                .executeScript("return arguments[0].textContent", element);
+
+        Assert.assertEquals("Couldn't verify the 'Review Sent' text", "Review sent", modalHeaderText.trim());
+    }
+
+    // Verifies that the "Review Sent" message is closed
+    public void verifyReviewSentMessageClosed() {
+        verifyReviewSentModalDisplayed();
+
+        testHelper.findElementUsingSelector("#product-comment-posted-modal > div > div > div.modal-body > div.post-comment-buttons > button").click();
+    }
 
 
 

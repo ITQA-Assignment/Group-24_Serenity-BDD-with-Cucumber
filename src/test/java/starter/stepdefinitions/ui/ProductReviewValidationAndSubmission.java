@@ -70,12 +70,12 @@ public class ProductReviewValidationAndSubmission {
 
     @Then("review sent message is displayed")
     public void review_sent_message_is_displayed() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        multiOptionProductPage.verifyReviewSentMessageDisplayed();
     }
 
-
-
-
+    @Then("user clicks ok button to close the review sent message")
+    public void user_clicks_ok_button_to_close_the_review_sent_message() {
+        multiOptionProductPage.verifyReviewSentMessageClosed();
+    }
 
 }
