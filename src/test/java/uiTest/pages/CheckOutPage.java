@@ -58,4 +58,6 @@ public class CheckOutPage {
     @Step
     public void clickPlaceOrderButton(){checkOutPageObject.clickPlaceOrderButton();}
 
+    public void clickProceedToCheckout() {
+    }
 }

@@ -55,8 +55,4 @@ public class AddToCart {
     public void user_should_navigate_to_to_cart_page() {shoppingCartPage.verifyCartPage();}
 
 
-
-
-
-
 }
