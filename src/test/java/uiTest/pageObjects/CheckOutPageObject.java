@@ -1,19 +1,19 @@
 package uiTest.pageObjects;
 
-import net.serenitybdd.annotations.Step;
+import net.serenitybdd.core.annotations.findby.By;
 import net.serenitybdd.core.pages.PageObject;
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import uiTest.helpers.TestHelper;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class CheckOutPageObject extends PageObject {
-    private TestHelper testHelper;
+    private final TestHelper testHelper;
 
     private boolean isAgreementChecked = false;
+
 
     public CheckOutPageObject() {
         this.testHelper = TestHelper.getInstance(getDriver());
@@ -24,7 +24,7 @@ public class CheckOutPageObject extends PageObject {
 
         WebElement element = testHelper.findElementUsingId("checkout-payment-step");
 
-        Assert.assertTrue(element!=null);
+        Assert.assertNotNull(element);
 
     }
 
@@ -47,14 +47,14 @@ public class CheckOutPageObject extends PageObject {
 
     public double selectShippingMethodAndGetCost(){
         testHelper.switchToIFrame("framelive");
+
         testHelper.findElementUsingId("delivery_option_2").click();
         WebElement element = testHelper.findElementUsingSelector(" #js-delivery > div > div.delivery-options > div:nth-child(4) > label > div > div.col-sm-3.col-xs-12 > span");
-        String deliveryMethodCost = (String) ((JavascriptExecutor) getDriver())
-                .executeScript("return arguments[0].textContent.trim()", element);
+        String deliveryMethodCost = testHelper.getElementTextContent(element);
 
         testHelper.findElementUsingSelector("#js-delivery > button").click();
 
-        if (deliveryMethodCost != "Free"){
+        if (!deliveryMethodCost.equals("Free")){
             return testHelper.priceExtractor(deliveryMethodCost);
         }else {
             return 0.0;
@@ -63,25 +63,20 @@ public class CheckOutPageObject extends PageObject {
 
     public double getTotalPrice(){
         testHelper.switchToIFrame("framelive");
+
         WebElement element = testHelper.findElementUsingSelector("#js-checkout-summary > div.card-block.cart-summary-totals.js-cart-summary-totals > div > span.value");
-        String total = (String) ((JavascriptExecutor) getDriver())
-                .executeScript("return arguments[0].textContent.trim()", element);
+        String total = testHelper.getElementTextContent(element);
+
         return testHelper.priceExtractor(total);
     }
 
-    public double getSubtotalPrice(){
-        testHelper.switchToIFrame("framelive");
-        WebElement element = testHelper.findElementUsingSelector("#cart-subtotal-products > span.value");
-        String subtotal = (String) ((JavascriptExecutor) getDriver())
-                .executeScript("return arguments[0].textContent.trim()", element);
-        return testHelper.priceExtractor(subtotal);
-    }
 
     public double getShippingCost(){
         testHelper.switchToIFrame("framelive");
+
         WebElement element = testHelper.findElementUsingSelector("#cart-subtotal-shipping > span.value");
-        String shipping = (String) ((JavascriptExecutor) getDriver())
-                .executeScript("return arguments[0].textContent.trim()", element);
+        String shipping = testHelper.getElementTextContent(element);
+
         return testHelper.priceExtractor(shipping);
     }
 
@@ -108,5 +103,30 @@ public class CheckOutPageObject extends PageObject {
     }
 
 
+    public List<String> getCheckoutItems() {
+
+        testHelper.findElementUsingSelector("#js-checkout-summary > div:nth-child(1) > div.cart-summary-products.js-cart-summary-products > p:nth-child(2) > a").click();
+        List<WebElement> orderedItems = getDriver().findElements(By.cssSelector("#cart-summary-product-list > ul > li"));
+
+        return
+                orderedItems.stream()
+                .map(item -> {
+                    String productName = item.findElement(By.cssSelector("div.media-body > span.product-name > a")).getText().trim();
+                    List<WebElement> options = item.findElements(By.cssSelector("div.product-line-info"));
+                    String formattedOptions = options.stream()
+                            .map(option -> {
+                                String label = option.findElement(By.cssSelector(".label")).getText().trim().replace(":", "");
+                                String value = option.findElement(By.cssSelector(".value")).getText().trim();
+                                return label + ": " + value;
+                            })
+                            .collect(Collectors.joining(" - "));
+
+                    String quantity = item.findElement(By.cssSelector("span.product-quantity")).getText().trim().replace("x", "");
+                    String fullProductName = formattedOptions.isEmpty() ? productName : productName + " (" + formattedOptions + ")";
+                    return fullProductName + " x" + quantity;
+
+                })
+                .collect(Collectors.toList());
+    }
 
 }

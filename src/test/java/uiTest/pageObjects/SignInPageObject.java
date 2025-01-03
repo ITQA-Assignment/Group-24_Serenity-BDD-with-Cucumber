@@ -3,13 +3,12 @@ package uiTest.pageObjects;
 import net.serenitybdd.core.pages.PageObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import uiTest.helpers.TestHelper;
 
 public class SignInPageObject extends PageObject {
 
-    private TestHelper testHelper;
+    private final TestHelper testHelper;
 
     public SignInPageObject() {
         this.testHelper = TestHelper.getInstance(getDriver());
@@ -18,8 +17,7 @@ public class SignInPageObject extends PageObject {
     public void verifySignInPage(){
         testHelper.switchToIFrame("framelive");
         WebElement element = testHelper.findElementUsingXpath("//*[@id=\"wrapper\"]/div/nav/ol/li[2]/span");
-        String breadcrumbItem = (String) ((JavascriptExecutor) getDriver())
-                .executeScript("return arguments[0].textContent", element);
+        String breadcrumbItem = testHelper.getElementTextContent(element);
 
         Assert.assertEquals("Couldn't verify the Home page", "Log in to your account", breadcrumbItem.trim());
     }

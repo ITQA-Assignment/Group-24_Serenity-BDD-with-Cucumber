@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 
 
 public class MultiOptionProductPageObject extends PageObject {
-    private TestHelper testHelper;
+    private final TestHelper testHelper;
 
     public MultiOptionProductPageObject() {
         this.testHelper = TestHelper.getInstance(getDriver());
