@@ -12,9 +12,11 @@ public class PostMethod {
     private EnvironmentVariables environmentVariables;
     private PostMethodImplementation postMethodImplementation;
 
+
     @Step
     public void setApiUrl() {
-        String apiUrl= EnvironmentSpecificConfiguration.from(environmentVariables)
+        String apiUrl;
+        apiUrl = EnvironmentSpecificConfiguration.from(environmentVariables)
                 .getProperty("api.base.url");
         postMethodImplementation = new PostMethodImplementation(apiUrl);
     }
@@ -27,9 +29,10 @@ public class PostMethod {
     public void createBook(int index){
         postMethodImplementation.createBook(index);
     }
+
     @Step
-    public void sentCreatedRequest(String endpoint){
-        postMethodImplementation.sentCreatedRequest(endpoint);
+    public void sentCreatedRequest(String endpoint, String requestBody){
+        postMethodImplementation.sentCreatedRequest(endpoint, requestBody);
 
     }
     @Step
