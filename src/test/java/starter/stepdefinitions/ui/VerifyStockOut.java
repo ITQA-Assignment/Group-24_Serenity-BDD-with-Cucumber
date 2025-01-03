@@ -7,12 +7,10 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import uiTest.helpers.PageNavigator;
 import uiTest.pages.HomeAccessoriesPage;
-import uiTest.pages.HomePage;
 
 public class VerifyStockOut {
 
     private final PageNavigator pageNavigator = PageNavigator.getInstance();
-    private final HomePage homePage = new HomePage();
     private final HomeAccessoriesPage homeAccessoriesPage = new HomeAccessoriesPage();
 
     private int initialStockCount;

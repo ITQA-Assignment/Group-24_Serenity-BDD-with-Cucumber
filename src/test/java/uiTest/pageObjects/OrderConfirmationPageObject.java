@@ -1,23 +1,18 @@
 package uiTest.pageObjects;
 
-import net.serenitybdd.annotations.Step;
 import net.serenitybdd.core.annotations.findby.By;
-import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import uiTest.helpers.PageNavigator;
 import uiTest.helpers.TestHelper;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class OrderConfirmationPageObject extends PageObject {
-    private TestHelper testHelper;
+    private final TestHelper testHelper;
     private static String orderReference;
-    private static  List<String> orderedItemList;
+    private static final List<String> orderedItemList = new ArrayList<>();
 
     public OrderConfirmationPageObject() {
         this.testHelper = TestHelper.getInstance(getDriver());
@@ -28,22 +23,24 @@ public class OrderConfirmationPageObject extends PageObject {
 
         WebElement element = testHelper.findElementUsingSelector("#wrapper > div > nav > ol > li:nth-child(2) > span");
 
-        String breadcrumbItem = (String) ((JavascriptExecutor) getDriver())
-                .executeScript("return arguments[0].textContent", element);
+        String breadcrumbItem = testHelper.getElementTextContent(element);
 
         Assert.assertEquals("Couldn't verify the Order Confirmation Page", "Order confirmation", breadcrumbItem.trim());
     }
 
-    public void seeTheOrderReferenceAndOrderedItems(){
+    public void seeTheOrderReferenceAndOrderedItems() {
         WebElement element = testHelper.findElementUsingId("order-reference-value");
-        String orderRef = (String) ((JavascriptExecutor) getDriver())
-                .executeScript("return arguments[0].textContent.trim()", element);
-        this.orderReference = orderRef.split(":")[1].trim();
+        String orderRef = testHelper.getElementTextContent(element);
+        orderReference = orderRef.split(":")[1].trim();
 
-        List<WebElement> orderedItemElements  = getDriver().findElements(By.cssSelector(".order-line .details span"));
-        orderedItemList = orderedItemElements.stream()
-                .map(WebElement::getText)
-                .collect(Collectors.toList());
+        List<WebElement> orderedItemElements = getDriver().findElements(By.cssSelector(".order-line .details span"));
+        List<WebElement> quantityElements = getDriver().findElements(By.cssSelector(".order-line .qty .row .col-xs-4:nth-child(2)"));
+
+        for (int i = 0; i < orderedItemElements.size(); i++) {
+            String productName = orderedItemElements.get(i).getText();
+            String quantity = quantityElements.get(i).getText();
+            orderedItemList.add(productName + " x" + quantity);
+        }
     }
 
     public static String getOrderReferencce() {
