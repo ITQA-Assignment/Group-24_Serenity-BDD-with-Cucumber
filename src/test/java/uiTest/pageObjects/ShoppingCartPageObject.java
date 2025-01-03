@@ -13,7 +13,7 @@ import org.openqa.selenium.WebElement;
 
 
 public class ShoppingCartPageObject extends PageObject {
-    private TestHelper testHelper;
+    private final TestHelper testHelper;
     public ShoppingCartPageObject() {
         this.testHelper = TestHelper.getInstance(getDriver());
     }
@@ -28,15 +28,13 @@ public class ShoppingCartPageObject extends PageObject {
     }
 
     public void selectSize(String size) {
-
         WebElement sizeDropdown = testHelper.findElementUsingXpath("//select[@id='group_1']/option[text()='S']");
         Assert.assertNotNull("Size dropdown option not found", sizeDropdown);
         sizeDropdown.click();
-
     }
 
     public void selectColor(String color) {
-
+        String heading = testHelper.getElementTextContent(element);
         WebElement colorElement = testHelper.findElementUsingXpath("//*[@id=\"group_1\"]");
         Assert.assertNotNull("Color option not found: " + color, colorElement);
         colorElement.click();

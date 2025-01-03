@@ -42,7 +42,7 @@ public class CheckoutAndOrderPlacement {
         checkOutPage.selectPredefinedAddress();
     }
 
-    @When("user select a shipping method")
+    @And("user select a shipping method")
     public void user_select_a_shipping_method() {
         checkOutPage.selectShippingMethod();
     }
@@ -57,14 +57,14 @@ public class CheckoutAndOrderPlacement {
         checkOutPage.selectPaymentOption();
     }
 
-    @When("user verify the agreement is unchecked")
+    @And("user verify the agreement is unchecked")
     public void user_verify_the_agreement_is_unchecked() {
         checkOutPage.verifyTheUncheckedAgreement();
     }
 
     @Then("place order button is disabled")
     public void place_order_button_is_disabled() {
-        checkOutPage.verifyDesabledPlaceOrderButton();
+        checkOutPage.verifyDisabledPlaceOrderButton();
     }
 
     @When("user check the agreement")
@@ -87,7 +87,7 @@ public class CheckoutAndOrderPlacement {
         orderConfirmationPage.verifyOrderConfirmationPage();
     }
 
-    @Then("user see the order reference and ordered items")
+    @And("user see the order reference and ordered items")
     public void user_see_the_order_reference_and_ordered_items() {
         orderConfirmationPage.seeTheOrderReferenceAndOrderedItems();
     }

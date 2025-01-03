@@ -2,6 +2,8 @@ package uiTest.helpers;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,7 +14,8 @@ public class TestHelper {
     private final WebDriver driver;
     public final FluentWait<WebDriver> fluentWait;
     private static final int ELEMENT_WAIT_TIMEOUT = 20;
-    private WebElement iframe;
+
+    private final WebDriverWait wait;
 
     private TestHelper(WebDriver driver) {
         if (driver == null) {
@@ -24,6 +27,8 @@ public class TestHelper {
                 .pollingEvery(Duration.ofSeconds(2))
                 .ignoring(StaleElementReferenceException.class)
                 .ignoring(NoSuchElementException.class);
+
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public static TestHelper getInstance(WebDriver driver) {
@@ -41,7 +46,7 @@ public class TestHelper {
 
             this.switchToDefaultContent();
 
-            iframe = fluentWait.until(driver -> {
+            WebElement iframe = fluentWait.until(driver -> {
                 try {
                     return driver.findElement(By.id(frameId));
                 } catch (Exception e) {
@@ -90,16 +95,41 @@ public class TestHelper {
         });
     }
 
-    public double priceExtractor(String price){
+    public String getElementTextContent(WebElement element){
+        return (String) ((JavascriptExecutor) driver)
+                .executeScript("return arguments[0].textContent.trim()", element);
+    }
+
+    public double priceExtractor(String price) {
+
         price = price.replaceAll("[^\\d.,]", "").trim();
         Pattern pattern = Pattern.compile("\\d{1,3}(?:,\\d{3})*(\\.\\d+)?");
         Matcher matcher = pattern.matcher(price);
+
         if (matcher.find()) {
             String value = matcher.group();
+            value = value.replace(",", "");
             return Double.parseDouble(value);
         } else {
             throw new IllegalStateException("No match found in the price string: " + price);
         }
     }
+
+    public void waitForJQuery() {
+        try {
+            wait.until(driver -> {
+                try {
+                    return ((JavascriptExecutor) driver)
+                            .executeScript("return jQuery.active == 0");
+                } catch (Exception e) {
+                    return true;
+                }
+            });
+
+        } catch (Exception e) {
+            System.out.println("Page load wait timeout - continuing anyway: " + e.getMessage());
+        }
+    }
+
 
 }
