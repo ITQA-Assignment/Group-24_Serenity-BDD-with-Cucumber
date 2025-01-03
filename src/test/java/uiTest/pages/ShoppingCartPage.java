@@ -6,12 +6,13 @@ import uiTest.pageObjects.ShoppingCartPageObject;
 
 public class ShoppingCartPage {
 
-    HomePageObject homePageObject;
-
     ShoppingCartPageObject shoppingCartPageObject ;
 
     @Step
-    public void verifyShoppingCartPage( ){ shoppingCartPageObject.verifyShoppingCartPage();}
+    public void verifyShoppingCartPage(){shoppingCartPageObject.verifyShoppingCartPage();}
+
+    @Step
+    public void clickProceedToCheckout(){shoppingCartPageObject.clickProceedToCheckout();}
 
     @Step
     public void selectSize( ){ shoppingCartPageObject.selectSize("S");}
@@ -40,17 +41,7 @@ public class ShoppingCartPage {
     @Step
     public void  clickHomeTab( ){ shoppingCartPageObject. clickHomeTab();}
 
-
     @Step
     public void  selectDifferentProduct( ){ shoppingCartPageObject. selectDifferentProduct();}
-
-    @Step
-    public void  proceedToCheckout( ){ shoppingCartPageObject. proceedToCheckout();}
-
-    @Step
-    public void  verifyCartPage( ){ shoppingCartPageObject. verifyCartPage();}
-
-
-
 
 }

@@ -21,10 +21,14 @@ public class ShoppingCartPageObject extends PageObject {
     public void verifyShoppingCartPage() {
 
         testHelper.switchToIFrame("framelive");
-        WebElement productName = testHelper.findElementUsingXpath("/html/head/title");
-        String breadcrumbItem = (String) ((JavascriptExecutor) getDriver())
-                .executeScript("return arguments[0].textContent", productName);
-        Assert.assertNotNull("Shopping cart page is not displayed", breadcrumbItem.trim());
+        WebElement element = testHelper.findElementUsingSelector("#main > div > div.cart-grid-body.col-lg-8 > div > div.card-block > h1");
+        String heading = testHelper.getElementTextContent(element);
+        Assert.assertEquals("Couldn't verify the Shopping Cart page", "Shopping Cart", heading);
+    }
+
+    public void clickProceedToCheckout(){
+        WebElement element = testHelper.findElementUsingSelector("#main > div > div.cart-grid-right.col-lg-4 > div.card.cart-summary > div.checkout.cart-detailed-actions.js-cart-detailed-actions.card-block > div > a");
+        element.click();
     }
 
     public void selectSize(String size) {
@@ -34,7 +38,6 @@ public class ShoppingCartPageObject extends PageObject {
     }
 
     public void selectColor(String color) {
-        String heading = testHelper.getElementTextContent(element);
         WebElement colorElement = testHelper.findElementUsingXpath("//*[@id=\"group_1\"]");
         Assert.assertNotNull("Color option not found: " + color, colorElement);
         colorElement.click();
@@ -96,7 +99,6 @@ public class ShoppingCartPageObject extends PageObject {
 
     public void clickContinueShoppingButton() {
         testHelper.switchToIFrame("framelive");
-        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(20));
         WebElement clickContinueShoppingButton = testHelper.findElementUsingXpath("//*[@id=\"blockcart-modal\"]/div/div/div[2]/div/div[2]/div/div/button");
         Assert.assertNotNull("Add to cart button not found", clickContinueShoppingButton);
         clickContinueShoppingButton.click();
@@ -142,33 +144,12 @@ public class ShoppingCartPageObject extends PageObject {
         }
     }
 
-
-
     public void selectDifferentProduct() {
         // Find and click the option for selecting a different product
         WebElement differentProductOption = testHelper.findElementUsingXpath("//*[@id=\"content\"]/section[1]/div/div[2]/article/div/div[2]/h3/a");
         differentProductOption.click();
     }
 
-    public void proceedToCheckout() {
-        testHelper.switchToIFrame("framelive");
-        // Find and click the Proceed to Checkout button
-        WebElement proceedButton = testHelper.findElementUsingXpath("//*[@id=\"blockcart-modal\"]/div/div/div[2]/div/div[2]/div/div/a");
-        proceedButton.click();
-    }
-
-    public void verifyCartPage() {
-
-        testHelper.switchToIFrame("framelive");
-
-        //WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(20));
-        WebElement element = testHelper.findElementUsingSelector("#main > div > div.cart-grid-body.col-lg-8 > div > div.card-block > h1");
-
-        String breadcrumbItem = (String) ((JavascriptExecutor) getDriver())
-                .executeScript("return arguments[0].textContent", element);
-
-        Assert.assertEquals("Couldn't verify the Shopping Cart page", "Shopping Cart", breadcrumbItem.trim());
-    }
 
 }
 

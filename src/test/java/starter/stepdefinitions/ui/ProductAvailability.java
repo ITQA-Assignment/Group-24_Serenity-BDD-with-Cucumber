@@ -2,17 +2,10 @@ package starter.stepdefinitions.ui;
 
 import io.cucumber.java.en.*;
 import net.serenitybdd.annotations.Steps;
-import uiTest.pages.HomePage;
 import uiTest.pages.ProductAvailabilityPage;
-import uiTest.pages.ShoppingCartPage;
 
 public class ProductAvailability {
 
-    @Steps
-    HomePage homePage;
-
-    @Steps
-    ShoppingCartPage shoppingCartPage;
 
     @Steps
     ProductAvailabilityPage productAvailabilityPage;

@@ -2,11 +2,11 @@ package uiTest.pages;
 
 import net.serenitybdd.annotations.Step;
 import uiTest.helpers.PageNavigator;
-import uiTest.pageObjects.YourAccountPageObject;
+import uiTest.pageObjects.UserAccountPageObject;
 
-public class YourAccountPage {
+public class UserAccountPage {
 
-    YourAccountPageObject yourAccountPageObject;
+    UserAccountPageObject userAccountPageObject;
 
     PageNavigator pageNavigator;
 
@@ -14,12 +14,12 @@ public class YourAccountPage {
     public void verifyUserAccountPage(){
         pageNavigator = PageNavigator.getInstance();
         pageNavigator.navigateToYourAccountPage();
-        yourAccountPageObject.verifyUserAccountPage();
+        userAccountPageObject.verifyUserAccountPage();
     }
 
     @Step
     public void clickOrderHistoryAndDetails(){
-        yourAccountPageObject.clickOrderHistoryAndDetails();
+        userAccountPageObject.clickOrderHistoryAndDetails();
     }
 
 

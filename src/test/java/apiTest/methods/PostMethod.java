@@ -19,7 +19,7 @@ public class PostMethod {
         postMethodImplementation = new PostMethodImplementation(apiUrl);
     }
 
- @Step
+    @Step
     public void setAuthentication(String username, String password) {
         postMethodImplementation. setAuthentication(username,password);
     }

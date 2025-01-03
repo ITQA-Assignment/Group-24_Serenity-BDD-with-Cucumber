@@ -3,7 +3,6 @@ package uiTest.pageObjects;
 import net.serenitybdd.core.pages.PageObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import uiTest.helpers.TestHelper;
 
@@ -20,10 +19,9 @@ public class ContactUsPageObject extends PageObject {
         testHelper.switchToIFrame("framelive");
 
         WebElement element = testHelper.findElementUsingSelector("#wrapper > div > nav > ol > li:nth-child(2) > span");
-        String breadcrumbItem = (String) ((JavascriptExecutor) getDriver())
-                .executeScript("return arguments[0].textContent", element);
+        String breadcrumbItem = testHelper.getElementTextContent(element);
 
-        Assert.assertEquals("Couldn't verify the Contact Us page", "Contact us", breadcrumbItem.trim());
+        Assert.assertEquals("Couldn't verify the Contact Us page", "Contact us", breadcrumbItem);
     }
 
 

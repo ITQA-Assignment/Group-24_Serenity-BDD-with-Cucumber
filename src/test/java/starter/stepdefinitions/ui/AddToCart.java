@@ -49,10 +49,10 @@ public class AddToCart {
     public void user_select_new_item() {shoppingCartPage.selectDifferentProduct();}
 
     @Then("user click  proceed to checkout button")
-    public void user_click_proceed_to_checkout_button() {shoppingCartPage.proceedToCheckout();}
+    public void user_click_proceed_to_checkout_button() {shoppingCartPage.clickProceedToCheckout();}
 
     @Then("User should navigate to to cart page")
-    public void user_should_navigate_to_to_cart_page() {shoppingCartPage.verifyCartPage();}
+    public void user_should_navigate_to_to_cart_page() {shoppingCartPage.verifyShoppingCartPage();}
 
 
 }
