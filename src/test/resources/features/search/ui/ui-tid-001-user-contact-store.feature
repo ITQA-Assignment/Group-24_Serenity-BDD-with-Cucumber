@@ -12,9 +12,10 @@ Feature: User contact store
 
   Scenario: User contacts the store through the "Contact Us" form
     Given User on the contact us page
-    When User clicks on the contact us section
-    Then User should navigate to contact us page
     When User types a message in the form
     And User clicks the send button
     Then User should see a confirmation that the form was successfully submitted
+    Then User navigates back to the homepage
+
+
 

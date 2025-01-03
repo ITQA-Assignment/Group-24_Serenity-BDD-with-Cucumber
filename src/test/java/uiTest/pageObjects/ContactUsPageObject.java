@@ -15,13 +15,11 @@ public class ContactUsPageObject extends PageObject {
     }
 
     public void verifyContactUsPage(){
-
         testHelper.switchToIFrame("framelive");
-
         WebElement element = testHelper.findElementUsingSelector("#wrapper > div > nav > ol > li:nth-child(2) > span");
+
         String breadcrumbItem = (String) ((JavascriptExecutor) getDriver())
                 .executeScript("return arguments[0].textContent", element);
-
         Assert.assertEquals("Couldn't verify the Contact Us page", "Contact us", breadcrumbItem.trim());
     }
 

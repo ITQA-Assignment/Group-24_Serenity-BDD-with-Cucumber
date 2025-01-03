@@ -4,12 +4,14 @@ import net.serenitybdd.core.pages.PageObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import uiTest.helpers.TestHelper;
 
 import java.time.Duration;
+import java.util.List;
 
 
 public class HomePageObject extends PageObject {
@@ -51,10 +53,25 @@ public class HomePageObject extends PageObject {
     public void clickContactUs() {
         testHelper.switchToIFrame("framelive");
         $(By.id("contact-link")).click();
-//        WebElement contactUsButton = testHelper.findElementUsingXpath("//*[@id=\"contact-link\"]/a");
-//      contactUsButton.click();
     }
 
+    public void navigateToHomePage() {
+        testHelper.switchToIFrame("framelive");
+        WebElement logo = testHelper.findElementUsingSelector("#_desktop_logo > a > img");
+        logo.click();
+    }
+
+    public void clickSearchBox() {
+       testHelper.switchToIFrame("framelive");
+       WebElement searchBox = testHelper.findElementUsingXpath("//*[@id=\"search_widget\"]/form/input[2]");
+       searchBox.click();
+   }
+
+
+    public void searchKeyword(String keyword) {
+        testHelper.switchToIFrame("framelive");
+        $("#search_widget > form > input.ui-autocomplete-input").sendKeys(keyword + Keys.ENTER);
+    }
 
 
 }
