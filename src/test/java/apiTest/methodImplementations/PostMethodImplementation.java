@@ -27,11 +27,7 @@ public class PostMethodImplementation {
         this.bookIndexToBeCreated = index;
 
     }
-    public void sentCreatedRequest(String endpoint) {
-        String requestBody = """
-        {
-        }
-        """;
+    public void sentCreatedRequest(String endpoint,String requestBody) {
 
         response = SerenityRest.given()
                 .header("Content-Type", "application/json")
