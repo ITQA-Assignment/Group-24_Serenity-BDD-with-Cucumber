@@ -35,4 +35,9 @@ public class HomePage {
     @Step
     public void clickContactUs() { homePageObject.clickContactUs(); }
 
+    @Step
+    public void clickAccessoriesTab(){
+        homePageObject.clickAccessoriesTab();
+    }
+
 }
