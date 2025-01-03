@@ -24,7 +24,7 @@ public class CheckoutAndOrderPlacement {
 
     @When("user click the proceed to checkout button")
     public void user_click_the_proceed_to_checkout_button() {
-        shoppingCartPage.clickProceedToCheckout();
+        checkOutPage.clickProceedToCheckout();
     }
 
     @Then("user navigate to the checkout page")

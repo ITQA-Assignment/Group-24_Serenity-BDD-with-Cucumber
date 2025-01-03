@@ -68,11 +68,14 @@ public class CheckOutPage {
     @Step
     public void clickPlaceOrderButton(){checkOutPageObject.clickPlaceOrderButton();}
 
+
+    public void clickProceedToCheckout() {
+    }
+
     @Step
     public void verifyTheCheckoutItems(List<String> orderedItems){
         List<String> checkoutItems = checkOutPageObject.getCheckoutItems();
         Assert.assertTrue(checkoutItems.containsAll(orderedItems));
     }
-
 
 }

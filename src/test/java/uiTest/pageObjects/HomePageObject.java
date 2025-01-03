@@ -47,13 +47,15 @@ public class HomePageObject extends PageObject {
         signInButton.click();
     }
 
+    public void clickProduct() {
+        testHelper.switchToIFrame("framelive");
+        WebElement clickProduct = testHelper.findElementUsingXpath("//*[@id=\"content\"]/section[1]/div/div[1]/article/div/div[1]/a");
+        clickProduct.click();
+    }
+
     public void clickContactUs() {
         testHelper.switchToIFrame("framelive");
         $(By.id("contact-link")).click();
-//        WebElement contactUsButton = testHelper.findElementUsingXpath("//*[@id=\"contact-link\"]/a");
-//      contactUsButton.click();
     }
-
-
 
 }
