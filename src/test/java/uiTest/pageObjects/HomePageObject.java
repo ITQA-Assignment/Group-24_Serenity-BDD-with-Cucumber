@@ -4,9 +4,9 @@ import net.serenitybdd.core.pages.PageObject;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import uiTest.helpers.TestHelper;
-
 
 public class HomePageObject extends PageObject {
     private final TestHelper testHelper;
@@ -54,9 +54,25 @@ public class HomePageObject extends PageObject {
         $(By.id("contact-link")).click();
     }
 
-    public void clickAccessoriesTab(){
-        testHelper.findElementUsingId("category-6").click();
+    public void navigateToHomePage() {
+        testHelper.switchToIFrame("framelive");
+        WebElement logo = testHelper.findElementUsingSelector("#_desktop_logo > a > img");
+        logo.click();
+    }
 
+    public void clickSearchBox() {
+       testHelper.switchToIFrame("framelive");
+       WebElement searchBox = testHelper.findElementUsingXpath("//*[@id=\"search_widget\"]/form/input[2]");
+       searchBox.click();
+   }
+
+    public void clickAccessoriesTab() {
+        testHelper.findElementUsingId("category-6").click();
+    }
+
+    public void searchKeyword(String keyword) {
+        testHelper.switchToIFrame("framelive");
+        $("#search_widget > form > input.ui-autocomplete-input").sendKeys(keyword + Keys.ENTER);
     }
 
 }

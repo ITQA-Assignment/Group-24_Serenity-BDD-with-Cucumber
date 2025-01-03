@@ -7,17 +7,15 @@ import org.openqa.selenium.WebElement;
 import uiTest.helpers.TestHelper;
 
 public class ContactUsPageObject extends PageObject {
-  
+
  private final TestHelper testHelper;
-  
+
     public ContactUsPageObject() {
         this.testHelper = TestHelper.getInstance(getDriver());
     }
 
     public void verifyContactUsPage(){
-
         testHelper.switchToIFrame("framelive");
-
         WebElement element = testHelper.findElementUsingSelector("#wrapper > div > nav > ol > li:nth-child(2) > span");
         String breadcrumbItem = testHelper.getElementTextContent(element);
 

@@ -23,6 +23,13 @@ public class AdminUpdateNonExistingBook {
         putMethod.setBookIndexToBePut(index);
     }
 
+    @When("admin sets the request body with fields id {int}, title {string}, author {string}")
+    public void admin_sets_the_request_body_with_fields(Integer id, String title, String author) {
+        String requestBody;
+            requestBody = "{\"id\": 50, \"title\": \"title123-Test\", \"author\": \"author123\"}";
+        putMethod.setRequestBody(requestBody);
+    }
+
     @When("admin send put request to endpoint {string}")
     public void admin_send_put_request_to_endpoint(String endpoint) {
         putMethod.sendPutRequest(endpoint);
