@@ -14,7 +14,10 @@ public class CheckOutPage {
     private double totalPriceBeforeAddedShippingMethod;
 
     @Step
-    public void verifyCheckoutPage(){ checkOutPageObject.verifyCheckoutPage(); }
+    public void verifyCheckoutPage(){checkOutPageObject.verifyCheckoutPage();}
+
+    @Step
+    public boolean booleanVerifyCheckoutPage(){return checkOutPageObject.booleanVerifyCheckoutPage();}
 
     @Step
     public void verifyPersonalInfoAutoCompletion(){ checkOutPageObject.verifyPersonalInfoAutoCompletion();}
