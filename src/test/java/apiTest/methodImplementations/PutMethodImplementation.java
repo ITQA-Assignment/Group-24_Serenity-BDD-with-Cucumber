@@ -12,6 +12,7 @@ public class PutMethodImplementation {
     private String password;
     private int bookIndexToBePut;
     private String requestBody;
+ 
 
     public PutMethodImplementation(String baseUrl) {
         this.baseUrl = baseUrl;
@@ -31,6 +32,7 @@ public class PutMethodImplementation {
     }
 
     public void sendPutRequest(String endpoint) {
+
         response = SerenityRest.given()
                 .header("Content-Type", "application/json")
                 .auth()
@@ -38,9 +40,11 @@ public class PutMethodImplementation {
                 .body(requestBody)
                 .when()
                 .put(baseUrl + endpoint + "/" + bookIndexToBePut);
+
     }
 
     public void verifyStatusCode(int expectedStatus) {
         Assert.assertEquals("Status code mismatch", expectedStatus, response.getStatusCode());
     }
 }
+
