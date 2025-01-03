@@ -25,8 +25,18 @@ public class GetMethod {
     }
 
     @Step
+    public void setAvailableBookIndexToRetrieve(int selectedAvailableIndex) {
+        getMethodImplementation.setAvailableBookIndexToRetrieve(selectedAvailableIndex);
+    }
+
+    @Step
     public void sendGetAllRequest(String endpoint) {
         getMethodImplementation.sendGetAllRequest(endpoint);
+    }
+
+    @Step
+    public void sendGetRequest(String endpoint) {
+        getMethodImplementation.sendGetRequest(endpoint);
     }
 
     @Step
@@ -38,6 +48,13 @@ public class GetMethod {
     public void displayAllTheAvailableBooks(){
         getMethodImplementation.displayAllTheAvailableBooks();
     }
+
+    @Step
+    public void displayTheSelectedBook(){
+        getMethodImplementation.displayTheSelectedBook();
+    }
+
+
 
 
 }

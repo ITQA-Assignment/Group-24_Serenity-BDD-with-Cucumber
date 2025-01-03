@@ -17,6 +17,8 @@ public class GetMethodImplementation {
 
     private String password;
 
+    private int selectedAvailableIndex;
+
 
     public GetMethodImplementation(String baseUrl) {
         this.baseUrl = baseUrl;
@@ -27,6 +29,10 @@ public class GetMethodImplementation {
         this.password=password;
     }
 
+    public void setAvailableBookIndexToRetrieve(int selectedAvailableIndex) {
+        this.selectedAvailableIndex=selectedAvailableIndex;
+    }
+
     public void sendGetAllRequest(String endpoint) {
         response = SerenityRest.given()
                 .header("Content-Type", "application/json")
@@ -34,6 +40,15 @@ public class GetMethodImplementation {
                 .basic(username, password)
                 .when()
                 .get(baseUrl+endpoint);
+    }
+
+    public void sendGetRequest(String endpoint) {
+        response = SerenityRest.given()
+                .header("Content-Type", "application/json")
+                .auth()
+                .basic(username, password)
+                .when()
+                .get(baseUrl+endpoint+"/"+selectedAvailableIndex);
     }
 
     public void verifyStatusCode(int expectedStatus) {
@@ -52,10 +67,27 @@ public class GetMethodImplementation {
 
         System.out.println("Available Books:\n");
         books.forEach(book -> {
+            Integer id = (Integer) book.get("id");
             String title = (String) book.get("title");
             String author = (String) book.get("author");
-            System.out.println("Title: " + title + ",\nAuthor: " + author + "\n");
+            System.out.println("ID:" + id + ",\n" + "Title: " + title + ",\nAuthor: " + author + "\n");
         });
+    }
+
+    public void displayTheSelectedBook(){
+        JsonPath jsonPath = response.jsonPath();
+        Map<String, Object> book = jsonPath.getMap("$");
+
+        if (book == null || book.isEmpty()) {
+            System.out.println("No book details found.");
+            return;
+        }
+
+        Integer id = (Integer) book.get("id");
+        String title = (String) book.get("title");
+        String author = (String) book.get("author");
+        System.out.println("ID:" + id + "\n" + "Title: " + title + ",\nAuthor: " + author + "\n");
+
     }
 
 }
