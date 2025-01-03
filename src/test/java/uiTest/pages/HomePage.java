@@ -25,4 +25,8 @@ public class HomePage {
     public void clickSignIn() {
         homePageObject.clickSignIn();
     }
+
+    @Step
+    public void clickContactUs() { homePageObject.clickContactUs(); }
+
 }
