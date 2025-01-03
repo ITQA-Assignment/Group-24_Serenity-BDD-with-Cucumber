@@ -1,6 +1,5 @@
 package apiTest.methods;
 
-
 import apiTest.methodImplementations.PutMethodImplementation;
 import net.serenitybdd.annotations.Step;
 import net.serenitybdd.model.environment.EnvironmentSpecificConfiguration;
@@ -20,13 +19,20 @@ public class PutMethod {
     }
 
     @Step
-    public void setUsernameAndPassword(String username, String password){
-        putMethodImplementation.setUsernameAndPassword(username,password);
+    public void setUsernameAndPassword(String username, String password) {
+        putMethodImplementation.setUsernameAndPassword(username, password);
     }
 
     @Step
+
     public void setBookIndexToBePut(int index) {
         putMethodImplementation.setBookIndexToBePut(index);
+    }
+
+    @Step
+    public void setRequestBody(String requestBody) {
+        putMethodImplementation.setRequestBody(requestBody);
+
     }
 
     @Step
@@ -40,3 +46,4 @@ public class PutMethod {
     }
 
 }
+

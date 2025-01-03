@@ -15,7 +15,8 @@ public class PostMethod {
 
     @Step
     public void setApiUrl() {
-        String apiUrl = EnvironmentSpecificConfiguration.from(environmentVariables)
+        String apiUrl;
+        apiUrl = EnvironmentSpecificConfiguration.from(environmentVariables)
                 .getProperty("api.base.url");
         postMethodImplementation = new PostMethodImplementation(apiUrl);
     }
@@ -31,8 +32,8 @@ public class PostMethod {
     }
 
     @Step
-    public void sentCreatedRequest(String endpoint) {
-        postMethodImplementation.sentCreatedRequest(endpoint);
+    public void sentCreatedRequest(String endpoint, String requestBody){
+        postMethodImplementation.sentCreatedRequest(endpoint, requestBody);
 
     }
 
