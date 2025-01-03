@@ -1,11 +1,11 @@
 package uiTest.pages;
 
 import net.serenitybdd.annotations.Step;
-import uiTest.helpers.PageNavigator;
 import uiTest.pageObjects.HomePageObject;
 
 public class HomePage {
 
+    public Object clickProduct;
     HomePageObject homePageObject;
 
     @Step
@@ -26,4 +26,13 @@ public class HomePage {
     public void clickSignIn() {
         homePageObject.clickSignIn();
     }
+
+    @Step
+    public void clickProduct() {
+        homePageObject.clickProduct();
+    }
+  
+    @Step
+    public void clickContactUs() { homePageObject.clickContactUs(); }
+
 }
