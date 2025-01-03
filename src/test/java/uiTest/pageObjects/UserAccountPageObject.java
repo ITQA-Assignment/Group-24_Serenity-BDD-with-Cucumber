@@ -5,9 +5,9 @@ import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import uiTest.helpers.TestHelper;
 
-public class YourAccountPageObject extends PageObject {
+public class UserAccountPageObject extends PageObject {
     private final TestHelper testHelper;
-    public YourAccountPageObject() {
+    public UserAccountPageObject() {
         this.testHelper = TestHelper.getInstance(getDriver());
     }
 
