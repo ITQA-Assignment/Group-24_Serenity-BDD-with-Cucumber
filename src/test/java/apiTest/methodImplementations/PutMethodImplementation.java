@@ -10,33 +10,28 @@ public class PutMethodImplementation {
 
     private String username;
     private String password;
-    private int bookIdToBeUpdated;
-    private String bookTitle;
-    private String bookAuthor;
-
+    private int bookIndexToBePut;
+    private String requestBody;
+ 
 
     public PutMethodImplementation(String baseUrl) {
         this.baseUrl = baseUrl;
     }
 
-    public void setUsernameAndPassword(String username, String password){
+    public void setUsernameAndPassword(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public void setBookDetailsToUpdate(int bookId, String title, String author) {
-        this.bookIdToBeUpdated = bookId;
-        this.bookTitle = title;
-        this.bookAuthor = author;
+    public void setBookIndexToBePut(int index) {
+        this.bookIndexToBePut = index;
     }
 
-    // Send PUT request to update the book
+    public void setRequestBody(String requestBody) {
+        this.requestBody = requestBody;
+    }
+
     public void sendPutRequest(String endpoint) {
-        String requestBody = "{\n" +
-                "    \"id\": " + bookIdToBeUpdated + ",\n" +
-                "    \"title\": \"" + bookTitle + "\",\n" +
-                "    \"author\": \"" + bookAuthor + "\"\n" +
-                "}";
 
         response = SerenityRest.given()
                 .header("Content-Type", "application/json")
@@ -44,12 +39,12 @@ public class PutMethodImplementation {
                 .basic(username, password)
                 .body(requestBody)
                 .when()
-                .put(baseUrl+endpoint+"/"+bookIdToBeUpdated);
+                .put(baseUrl + endpoint + "/" + bookIndexToBePut);
+
     }
 
     public void verifyStatusCode(int expectedStatus) {
         Assert.assertEquals("Status code mismatch", expectedStatus, response.getStatusCode());
-
     }
-
 }
+

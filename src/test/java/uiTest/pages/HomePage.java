@@ -31,8 +31,25 @@ public class HomePage {
     public void clickProduct() {
         homePageObject.clickProduct();
     }
-  
+
     @Step
     public void clickContactUs() { homePageObject.clickContactUs(); }
+
+    @Step
+    public void clickSearchBox() { homePageObject.clickSearchBox(); }
+
+    @Step
+    public void searchKeyword(String keyword) {
+        homePageObject.searchKeyword(keyword); }
+
+    @Step
+    public void navigateToHomePage() { homePageObject.navigateToHomePage();
+    }
+
+
+    @Step
+    public void clickAccessoriesTab(){
+        homePageObject.clickAccessoriesTab();
+    }
 
 }

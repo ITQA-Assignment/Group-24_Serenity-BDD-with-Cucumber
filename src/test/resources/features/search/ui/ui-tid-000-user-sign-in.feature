@@ -1,5 +1,6 @@
 Feature: User Sign In
 
+
   Scenario: Sign In with the Valid Credentials
     Given user in the homepage
     When user click sign in tab

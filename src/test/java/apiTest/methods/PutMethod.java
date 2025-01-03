@@ -24,8 +24,15 @@ public class PutMethod {
     }
 
     @Step
-    public void setBookDetailsToUpdate(int bookId, String title, String author) {
-        putMethodImplementation.setBookDetailsToUpdate(bookId, title, author);
+
+    public void setBookIndexToBePut(int index) {
+        putMethodImplementation.setBookIndexToBePut(index);
+    }
+
+    @Step
+    public void setRequestBody(String requestBody) {
+        putMethodImplementation.setRequestBody(requestBody);
+
     }
 
     @Step
@@ -37,4 +44,6 @@ public class PutMethod {
     public void verifyResponseStatusCode(int expectedStatus) {
         putMethodImplementation.verifyStatusCode(expectedStatus);
     }
+
 }
+

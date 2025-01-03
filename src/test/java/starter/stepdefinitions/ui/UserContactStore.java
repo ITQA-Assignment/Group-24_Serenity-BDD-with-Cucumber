@@ -42,4 +42,8 @@ public class UserContactStore {
 
     @Given("User on the contact us page")
     public void user_on_the_contact_us_page() {contactUsPage.verifyContactUsPage();}
+
+    @Then("User navigates back to the homepage")
+    public void user_navigates_back_to_the_homepage() { homePage.navigateToHomePage();}
+
 }
