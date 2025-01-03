@@ -54,4 +54,9 @@ public class HomePageObject extends PageObject {
         $(By.id("contact-link")).click();
     }
 
+    public void clickAccessoriesTab(){
+        testHelper.findElementUsingId("category-6").click();
+
+    }
+
 }
