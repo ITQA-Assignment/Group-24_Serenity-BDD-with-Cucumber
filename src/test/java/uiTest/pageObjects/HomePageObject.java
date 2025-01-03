@@ -8,10 +8,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import uiTest.helpers.TestHelper;
 
-import java.time.Duration;
-import java.util.List;
-
-
 public class HomePageObject extends PageObject {
     private final TestHelper testHelper;
 
@@ -70,14 +66,13 @@ public class HomePageObject extends PageObject {
        searchBox.click();
    }
 
-    public void clickAccessoriesTab(){
+    public void clickAccessoriesTab() {
         testHelper.findElementUsingId("category-6").click();
+    }
 
     public void searchKeyword(String keyword) {
         testHelper.switchToIFrame("framelive");
         $("#search_widget > form > input.ui-autocomplete-input").sendKeys(keyword + Keys.ENTER);
-    }
-
     }
 
 }

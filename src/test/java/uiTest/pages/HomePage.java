@@ -39,7 +39,8 @@ public class HomePage {
     public void clickSearchBox() { homePageObject.clickSearchBox(); }
 
     @Step
-    public void searchKeyword(String keyword) { homePageObject.searchKeyword(keyword); }
+    public void searchKeyword(String keyword) {
+        homePageObject.searchKeyword(keyword); }
 
     @Step
     public void navigateToHomePage() { homePageObject.navigateToHomePage();
