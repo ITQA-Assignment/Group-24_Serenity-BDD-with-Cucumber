@@ -16,6 +16,7 @@ public class UserDeleteABook {
 
     @When("user login with username {string} & password {string}")
     public void user_login_with_username_and_password(String username, String password) {
+        deleteMethod.setUsernameAndPassword(username,password);
     }
     @When("user select a book to delete with the index {int}")
     public void user_select_a_book_to_delete_using_the_index(Integer index) {

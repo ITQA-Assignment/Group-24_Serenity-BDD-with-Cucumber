@@ -3,7 +3,6 @@ package uiTest.pageObjects;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
 import uiTest.helpers.TestHelper;
 import org.openqa.selenium.WebElement;
 import static org.junit.Assert.assertTrue;
@@ -104,10 +103,9 @@ public class MultiOptionProductPageObject extends PageObject {
     // Verifies that the "Review Sent" message is displayed
     public void verifyReviewSentMessageDisplayed() {
         WebElement element = testHelper.findElementUsingSelector("#product-comment-posted-modal > div > div > div.modal-header > p");
-        String modalHeaderText = (String) ((JavascriptExecutor) getDriver())
-                .executeScript("return arguments[0].textContent", element);
+        String modalHeaderText = testHelper.getElementTextContent(element);
 
-        Assert.assertEquals("Couldn't verify the 'Review Sent' text", "Review sent", modalHeaderText.trim());
+        Assert.assertEquals("Couldn't verify the 'Review Sent' text", "Review sent", modalHeaderText);
     }
 
     // Verifies that the "Review Sent" message is closed

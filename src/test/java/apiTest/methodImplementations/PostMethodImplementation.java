@@ -6,7 +6,7 @@ import org.junit.Assert;
 
 public class PostMethodImplementation {
     private Response response;
-    private String apiUrl;
+    private final String apiUrl;
 
     private String username;
 

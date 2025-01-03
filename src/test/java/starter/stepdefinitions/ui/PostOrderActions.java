@@ -9,7 +9,7 @@ import java.util.List;
 public class PostOrderActions {
 
     @Steps
-    YourAccountPage yourAccountPage;
+    UserAccountPage userAccountPage;
 
     @Steps
     OrderConfirmationPage orderConfirmationPage;
@@ -29,14 +29,14 @@ public class PostOrderActions {
 
     @Given("user in the user account page knowing the order reference and ordered items")
     public void user_in_the_user_account_page_knowing_the_order_reference_and_ordered_items() {
-        yourAccountPage.verifyUserAccountPage();
+        userAccountPage.verifyUserAccountPage();
         lastOrderReference = orderConfirmationPage.getOrderReferencce();
         orderedItems = orderConfirmationPage.getOrderedItemList();
     }
 
     @When("user click order history and details card")
     public void user_click_order_history_and_details_card() {
-        yourAccountPage.clickOrderHistoryAndDetails();
+        userAccountPage.clickOrderHistoryAndDetails();
     }
 
     @Then("user navigate to the order history page")

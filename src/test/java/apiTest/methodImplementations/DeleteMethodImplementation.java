@@ -6,7 +6,7 @@ import org.junit.Assert;
 
 public class DeleteMethodImplementation {
     private Response response;
-    private String baseUrl;
+    private final String baseUrl;
 
     private String username;
 
@@ -32,7 +32,7 @@ public class DeleteMethodImplementation {
         response = SerenityRest.given()
                 .header("Content-Type", "application/json")
                 .auth()
-                .basic("user", "password")
+                .basic(username, password)
                 .when()
                 .delete(baseUrl+endpoint+"/"+bookIndexToBeDeleted);
     }
