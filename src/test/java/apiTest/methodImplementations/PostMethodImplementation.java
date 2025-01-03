@@ -4,6 +4,8 @@ import io.restassured.response.Response;
 import net.serenitybdd.rest.SerenityRest;
 import org.junit.Assert;
 
+import static net.serenitybdd.rest.RestRequests.given;
+
 public class PostMethodImplementation {
     private Response response;
     private final String apiUrl;
@@ -13,6 +15,8 @@ public class PostMethodImplementation {
     private String password;
 
     private int bookIndexToBeCreated;
+
+    private String baseUrl;
 
     public PostMethodImplementation(String apiUrl) {
         this.apiUrl = apiUrl;
@@ -45,5 +49,36 @@ public class PostMethodImplementation {
         Assert.assertEquals("Status code match", expectedStatusCode, response.getStatusCode());
 
     }
+
+
+
+    public void createABook(String endpoint, String payload){
+        response = SerenityRest.given()
+                .header("Content-Type", "application/json")
+                .auth()
+                .basic("user", "password")
+                .body(payload)
+                .post(apiUrl + endpoint);
+
+        System.out.println("Response Body: " + response.getBody().asString());
+    }
+
+
+    public void verifyStatusCode(int expectedStatus) {
+        Assert.assertEquals("Status code mismatch", expectedStatus, response.getStatusCode());
+    }
+
+
+    public void sendLoginRequest(String endpoint, String payload) {
+        response = SerenityRest.given()
+                .header("Content-Type", "application/json")
+                .auth()
+                .basic("username", "password")
+                .body(payload)
+                .post(apiUrl + endpoint);
+
+    }
+
+
 
 }
