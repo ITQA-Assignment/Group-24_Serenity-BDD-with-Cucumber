@@ -10,8 +10,7 @@ import uiTest.helpers.TestHelper;
 import java.util.List;
 
 public class SearchResultsPageObject extends PageObject {
-
-    private TestHelper testHelper;
+    private final TestHelper testHelper;
 
     public SearchResultsPageObject() {
         this.testHelper = TestHelper.getInstance(getDriver());
