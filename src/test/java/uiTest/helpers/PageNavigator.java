@@ -1,7 +1,5 @@
 package uiTest.helpers;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import uiTest.pageObjects.HomePageObject;
 
 public class PageNavigator {
@@ -11,9 +9,8 @@ public class PageNavigator {
     private final TestHelper testHelper;
 
     private PageNavigator(){
-        WebDriver webDriver = null;
         homePageObject = new HomePageObject();
-        testHelper = TestHelper.getInstance(webDriver);
+        testHelper = TestHelper.getInstance(null);
     }
 
     public static PageNavigator getInstance() {

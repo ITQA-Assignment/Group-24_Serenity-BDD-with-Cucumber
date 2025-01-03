@@ -4,11 +4,14 @@ import net.serenitybdd.annotations.Step;
 import org.junit.Assert;
 import uiTest.pageObjects.CheckOutPageObject;
 
+import java.util.List;
+
 public class CheckOutPage {
 
     CheckOutPageObject checkOutPageObject;
 
-    private double shippingMethodCost=0.0;
+    private double shippingMethodCost = 0.0;
+    private double totalPriceBeforeAddedShippingMethod;
 
     @Step
     public void verifyCheckoutPage(){ checkOutPageObject.verifyCheckoutPage(); }
@@ -20,15 +23,22 @@ public class CheckOutPage {
     public void selectPredefinedAddress(){ checkOutPageObject.selectPredefinedAddress(); }
 
     @Step
-    public void selectShippingMethod(){ this.shippingMethodCost = checkOutPageObject.selectShippingMethodAndGetCost(); }
+    public void selectShippingMethod(){
+        this.totalPriceBeforeAddedShippingMethod = checkOutPageObject.getTotalPrice();
+        this.shippingMethodCost = checkOutPageObject.selectShippingMethodAndGetCost();
+
+    }
 
     @Step
     public void verifyTotalPriceWithShipping(){
-        double subtotalPrice = checkOutPageObject.getSubtotalPrice();
-        double shippingCost = checkOutPageObject.getShippingCost();
-        double totalPrice = checkOutPageObject.getTotalPrice();
 
-        Assert.assertTrue((shippingCost == this.shippingMethodCost) && Math.round(totalPrice)== Math.round(subtotalPrice+shippingCost));
+        double shippingCost = checkOutPageObject.getShippingCost();
+        double totalPrice = Math.round(checkOutPageObject.getTotalPrice() * 100.0) / 100.0;
+
+        double expectedTotalPrice = totalPriceBeforeAddedShippingMethod + shippingCost;
+        expectedTotalPrice =  Math.round(expectedTotalPrice * 100.0) / 100.0;
+
+        Assert.assertTrue(this.shippingMethodCost == shippingCost && expectedTotalPrice == totalPrice);
     }
 
     @Step
@@ -37,13 +47,13 @@ public class CheckOutPage {
     @Step
     public void verifyTheUncheckedAgreement(){
         boolean isAgreementChecked = checkOutPageObject.isAgreementChecked();
-        Assert.assertTrue(isAgreementChecked == false);
+        Assert.assertFalse(isAgreementChecked);
     }
 
     @Step
-    public void verifyDesabledPlaceOrderButton(){
+    public void verifyDisabledPlaceOrderButton(){
         String placeOrderButtonAvailability = checkOutPageObject.getPlaceOrderButtonAvailability();
-        Assert.assertTrue(placeOrderButtonAvailability == "disabled");
+        Assert.assertSame("disabled", placeOrderButtonAvailability);
     }
 
     @Step
@@ -52,10 +62,17 @@ public class CheckOutPage {
     @Step
     public void verifyEnabledPlaceOrderButton(){
         String placeOrderButtonAvailability = checkOutPageObject.getPlaceOrderButtonAvailability();
-        Assert.assertTrue(placeOrderButtonAvailability == "enabled");
+        Assert.assertSame("enabled", placeOrderButtonAvailability);
     }
 
     @Step
     public void clickPlaceOrderButton(){checkOutPageObject.clickPlaceOrderButton();}
+
+    @Step
+    public void verifyTheCheckoutItems(List<String> orderedItems){
+        List<String> checkoutItems = checkOutPageObject.getCheckoutItems();
+        Assert.assertTrue(checkoutItems.containsAll(orderedItems));
+    }
+
 
 }

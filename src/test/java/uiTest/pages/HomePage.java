@@ -1,7 +1,6 @@
 package uiTest.pages;
 
 import net.serenitybdd.annotations.Step;
-import uiTest.helpers.PageNavigator;
 import uiTest.pageObjects.HomePageObject;
 
 public class HomePage {
