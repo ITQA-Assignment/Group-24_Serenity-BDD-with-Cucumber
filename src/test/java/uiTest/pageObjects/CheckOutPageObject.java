@@ -23,9 +23,17 @@ public class CheckOutPageObject extends PageObject {
         testHelper.switchToIFrame("framelive");
 
         WebElement element = testHelper.findElementUsingId("checkout-payment-step");
-
         Assert.assertNotNull(element);
+    }
 
+    public boolean booleanVerifyCheckoutPage(){
+        try {
+            testHelper.switchToIFrame("framelive");
+            WebElement element = testHelper.findElementUsingId("checkout-payment-step");
+            return element != null;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void verifyPersonalInfoAutoCompletion(){

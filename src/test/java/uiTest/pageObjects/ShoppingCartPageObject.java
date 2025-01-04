@@ -26,6 +26,15 @@ public class ShoppingCartPageObject extends PageObject {
         Assert.assertEquals("Couldn't verify the Shopping Cart page", "Shopping Cart", heading);
     }
 
+    public boolean booleanVerifyShoppingCartPage() {
+
+        testHelper.switchToIFrame("framelive");
+        WebElement element = testHelper.findElementUsingSelector("#main > div > div.cart-grid-body.col-lg-8 > div > div.card-block > h1");
+        String heading = testHelper.getElementTextContent(element);
+        return heading.equals("Shopping Cart");
+    }
+
+
     public void clickProceedToCheckout(){
         WebElement element = testHelper.findElementUsingSelector("#main > div > div.cart-grid-right.col-lg-4 > div.card.cart-summary > div.checkout.cart-detailed-actions.js-cart-detailed-actions.card-block > div > a");
         element.click();
@@ -148,6 +157,12 @@ public class ShoppingCartPageObject extends PageObject {
         // Find and click the option for selecting a different product
         WebElement differentProductOption = testHelper.findElementUsingXpath("//*[@id=\"content\"]/section[1]/div/div[2]/article/div/div[2]/h3/a");
         differentProductOption.click();
+    }
+
+    public void  verifyUnsuccessfulReorder( ){
+        WebElement error = testHelper.findElementUsingSelector("#notifications > div > article > ul > li");
+        String errorMessage = testHelper.getElementTextContent(error);
+        Assert.assertTrue(errorMessage.contains("unable to renew your order"));
     }
 
 

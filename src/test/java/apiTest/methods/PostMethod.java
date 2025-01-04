@@ -1,6 +1,7 @@
 package apiTest.methods;
 
 
+import apiTest.methodImplementations.DeleteMethodImplementation;
 import apiTest.methodImplementations.PostMethodImplementation;
 import net.serenitybdd.annotations.Step;
 import net.serenitybdd.model.environment.EnvironmentSpecificConfiguration;
@@ -12,7 +13,6 @@ public class PostMethod {
     private EnvironmentVariables environmentVariables;
     private PostMethodImplementation postMethodImplementation;
 
-
     @Step
     public void setApiUrl() {
         String apiUrl;
@@ -23,10 +23,11 @@ public class PostMethod {
 
     @Step
     public void setAuthentication(String username, String password) {
-        postMethodImplementation. setAuthentication(username,password);
+        postMethodImplementation.setAuthentication(username, password);
     }
+
     @Step
-    public void createBook(int index){
+    public void createBook(int index) {
         postMethodImplementation.createBook(index);
     }
 
@@ -35,9 +36,28 @@ public class PostMethod {
         postMethodImplementation.sentCreatedRequest(endpoint, requestBody);
 
     }
+
     @Step
-    public void createResponse(int expectedStatusCode){
+    public void createResponse(int expectedStatusCode) {
         postMethodImplementation.createResponse(expectedStatusCode);
     }
+
+
+
+    @Step
+    public void createABook(String endpoint, String payload) {
+        postMethodImplementation.createABook(endpoint, payload);
+    }
+
+    @Step
+    public void verifyResponseStatusCode(int expectedStatus) {
+        postMethodImplementation.verifyStatusCode(expectedStatus);
+    }
+
+    @Step
+    public void sendLoginRequest(String endpoint, String payload) {
+        postMethodImplementation.sendLoginRequest(endpoint,payload);
+    }
+
 
 }

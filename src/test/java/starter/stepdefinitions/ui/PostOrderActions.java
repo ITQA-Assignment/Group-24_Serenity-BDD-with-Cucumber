@@ -23,9 +23,14 @@ public class PostOrderActions {
     @Steps
     CheckOutPage checkOutPage;
 
+    @Steps
+    ShoppingCartPage shoppingCartPage;
+
     private String lastOrderReference;
 
     private List<String> orderedItems;
+
+    private String userRedirection;
 
     @Given("user in the user account page knowing the order reference and ordered items")
     public void user_in_the_user_account_page_knowing_the_order_reference_and_ordered_items() {
@@ -94,15 +99,34 @@ public class PostOrderActions {
         orderHistoryPage.clickReorderLink(lastOrderReference);
     }
 
-    @Then("user navigate to the checkout page with referenced ordered items")
-    public void user_navigate_to_the_checkout_page_with_referenced_ordered_items() {
-        checkOutPage.verifyCheckoutPage();
+    @Then("user is redirected to either the checkout page or the cart page based on the availability of reorder stock")
+    public void user_is_redirected_to_either_the_checkout_page_or_the_cart_page_based_on_the_availability_of_reorder_stock() {
+        if (checkOutPage.booleanVerifyCheckoutPage()) {
+            this.userRedirection = "checkout";
+        } else if (shoppingCartPage.booleanVerifyShoppingCartPage()) {
+            this.userRedirection = "shoppingCart";
+        } else {
+            throw new AssertionError("Neither Checkout Page nor Shopping Cart Page was found.");
+        }
     }
 
-    @And("user verifies that the same items are displayed")
-    public void user_verifies_that_the_same_items_are_displayed() {
-        checkOutPage.verifyTheCheckoutItems(orderedItems);
+    @Then("if user is redirected to the checkout page, the same referenced order items should be displayed")
+    public void if_user_is_redirected_to_the_checkout_page_the_same_referenced_order_items_should_be_displayed() {
+
+        try{
+            if(userRedirection=="checkout"){
+                checkOutPage.verifyTheCheckoutItems(orderedItems);
+            }else{throw new IllegalAccessException();}
+        }catch (Exception e){System.out.println("User is not in the Checkout Page. Insufficient stock. The Reorder is unsuccessful!");}
     }
 
+    @Then("if user is redirected to the cart page, the user should see the error message for insufficient stock")
+    public void if_user_is_redirected_to_the_cart_page_the_user_should_see_the_error_message_for_insufficient_stock() {
 
+        try{
+            if(userRedirection=="shoppingCart"){
+                shoppingCartPage.verifyUnsuccessfulReorder();
+            }else{throw new IllegalAccessException();}
+        }catch (Exception e){System.out.println("User is not in the checkout Page. The Reorder is successful!");}
+    }
 }

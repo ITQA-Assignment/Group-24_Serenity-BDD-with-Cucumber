@@ -20,6 +20,7 @@ public class GetMethodImplementation {
     private int selectedAvailableIndex;
 
 
+
     public GetMethodImplementation(String baseUrl) {
         this.baseUrl = baseUrl;
     }
@@ -29,9 +30,13 @@ public class GetMethodImplementation {
         this.password=password;
     }
 
+
+
     public void setAvailableBookIndexToRetrieve(int selectedAvailableIndex) {
         this.selectedAvailableIndex=selectedAvailableIndex;
     }
+
+
 
     public void sendGetAllRequest(String endpoint) {
         response = SerenityRest.given()
@@ -41,19 +46,34 @@ public class GetMethodImplementation {
                 .when()
                 .get(baseUrl+endpoint);
     }
-
-    public void sendGetRequest(String endpoint) {
+    public void sendGetRequestWithNonNumericId(String endpoint, String nonNumericId) {
         response = SerenityRest.given()
                 .header("Content-Type", "application/json")
                 .auth()
                 .basic(username, password)
                 .when()
-                .get(baseUrl+endpoint+"/"+selectedAvailableIndex);
+                .get(baseUrl + endpoint + "/" + nonNumericId);
+    }
+
+
+    public void sendGetRequest(String endpoint) {
+
+            response = SerenityRest.given()
+                    .header("Content-Type", "application/json")
+                    .auth()
+                    .basic(username, password)
+                    .when()
+                    .get(baseUrl + endpoint + "/" + selectedAvailableIndex);
+
+
     }
 
     public void verifyStatusCode(int expectedStatus) {
         Assert.assertEquals("Status code mismatch", expectedStatus, response.getStatusCode());
     }
+
+
+
 
     public void displayAllTheAvailableBooks(){
 
@@ -89,5 +109,8 @@ public class GetMethodImplementation {
         System.out.println("ID:" + id + "\n" + "Title: " + title + ",\nAuthor: " + author + "\n");
 
     }
+
+
+
 
 }
