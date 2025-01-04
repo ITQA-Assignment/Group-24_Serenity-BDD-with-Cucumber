@@ -8,8 +8,8 @@ public class UserUpdateABook {
     @Steps
     PutMethod putMethod;
 
-    @Given("the base api url for update method is set")
-    public void the_base_api_url_for_update_method_is_set() {
+    @Given("set the base api url for update method")
+    public void set_the_base_api_url_for_update_method() {
         putMethod.setBaseURL();
     }
 
@@ -23,13 +23,13 @@ public class UserUpdateABook {
         putMethod.setBookDetailsToUpdate(bookId, title, author);
     }
 
-    @When("user sends a PUT request to the endpoint {string}")
-    public void user_sends_put_request_to_the_endpoint(String endpoint) {
-        putMethod.sendPutRequest(endpoint);
+    @When("user sends a put request to the url {string}")
+    public void user_sends_put_request_to_the_url(String endpoint) {
+        putMethod.sendPutRequestToUpdateABook(endpoint);
     }
 
-    @Then("the response status code should be {int}")
-    public void the_response_status_code_should_be(int expectedStatus) {
+    @Then("the expected response status code should be {int}")
+    public void the_expected_response_status_code_should_be(int expectedStatus) {
         putMethod.verifyResponseStatusCode(expectedStatus);
     }
 }

@@ -36,6 +36,12 @@ public class PutMethod {
     }
 
     @Step
+    public void setBookDetailsToUpdate(int bookId, String title, String author) {
+        putMethodImplementation.setBookDetailsToUpdate(bookId, title, author);
+    }
+
+
+    @Step
     public void sendPutRequest(String endpoint) {
         putMethodImplementation.sendPutRequest(endpoint);
     }
@@ -45,5 +51,9 @@ public class PutMethod {
         putMethodImplementation.verifyStatusCode(expectedStatus);
     }
 
-}
+    @Step
+    public void sendPutRequestToUpdateABook(String endpoint) {
+        putMethodImplementation.sendPutRequestToUpdateABook(endpoint);
+    }
 
+}
