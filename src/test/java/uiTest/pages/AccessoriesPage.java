@@ -26,5 +26,14 @@ public class AccessoriesPage {
     public void verifyAccessoriesSorted() {
         accessoriesPageObject.verifyAccessoriesSorted();
     }
+
+    @Step
+    public void selectStudioDesignFromBrand(){
+        accessoriesPageObject.selectStudioDesignFromBrand();
+    }
+    @Step
+    public void verifyFilteredByBrand(String brandName) {
+        accessoriesPageObject.verifyFilteredByBrand(brandName);
+    }
 }
 

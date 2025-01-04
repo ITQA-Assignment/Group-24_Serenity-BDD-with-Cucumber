@@ -25,6 +25,11 @@ public class AccessoriesPageObject extends PageObject {
     public void clickSortByDropdown(){
         testHelper.findElementUsingSelector("#js-product-list-top > div.col-lg-7 > div > div.col-xs-8.col-sm-7.col-md-9.products-sort-order.dropdown > button").click();
     }
+    public void selectStudioDesignFromBrand(){
+        WebElement studioDesignFilter = testHelper.findElementUsingSelector("label[for='facet_label_5']"); // Adjust based on actual DOM
+        studioDesignFilter.click();
+        testHelper.waitForJQuery();
+    }
 
     public void selectAToZOptionFromSortByDropdown() {
         testHelper.findElementUsingSelector("#js-product-list-top > div.col-lg-7 > div > div.col-xs-8.col-sm-7.col-md-9.products-sort-order.dropdown.open > div > a:nth-child(3)").click();
@@ -41,6 +46,13 @@ public class AccessoriesPageObject extends PageObject {
         List<String> sortedNames = extractedNames.stream().sorted().collect(Collectors.toList());
 
         Assert.assertEquals("Accessories are not sorted alphabetically", sortedNames, extractedNames);
+    }
+    public void verifyFilteredByBrand(String brandName) {
+        List<WebElement> productBrands = getDriver().findElements(By.cssSelector("#facet_72814 > li:nth-child(2) > label"));
+        boolean allMatch = productBrands.stream()
+                .allMatch(el -> el.getText().contains(brandName));
+
+        Assert.assertTrue("Some products are not from the selected brand: " + brandName, allMatch);
     }
 
 }
