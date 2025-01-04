@@ -23,6 +23,10 @@ Feature: Post Order Actions
     Given user in the user account page knowing the order reference and ordered items
     When user click order history and details card
     And user click the reorder link for the referenced order
-    Then user navigate to the checkout page with referenced ordered items
-    And user verifies that the same items are displayed
+
+    Then user is redirected to either the checkout page or the cart page based on the availability of reorder stock
+    And if user is redirected to the checkout page, the same referenced order items should be displayed
+    And if user is redirected to the cart page, the user should see the error message for insufficient stock
+
+
 
