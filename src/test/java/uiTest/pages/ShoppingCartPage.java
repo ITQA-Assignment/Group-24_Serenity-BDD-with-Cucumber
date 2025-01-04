@@ -12,43 +12,35 @@ public class ShoppingCartPage {
     public void verifyShoppingCartPage(){shoppingCartPageObject.verifyShoppingCartPage();}
 
     @Step
-    public boolean booleanVerifyShoppingCartPage(){return shoppingCartPageObject.booleanVerifyShoppingCartPage();}
-
-
-
-    @Step
     public void clickProceedToCheckout(){shoppingCartPageObject.clickProceedToCheckout();}
 
     @Step
-    public void selectSize( ){ shoppingCartPageObject.selectSize("S");}
+    public void enterQuantity( ){ shoppingCartPageObject.enterQuantity(10);}
 
     @Step
-    public void selectColor( ){ shoppingCartPageObject.selectColor("Black");}
+    public void clickAddToCart( ){ shoppingCartPageObject.clickAddToCart(10);}
 
     @Step
-    public void enterQuantity( ){ shoppingCartPageObject.enterQuantity(300);}
+    public void clickContinueShopping( ){ shoppingCartPageObject.clickContinueShopping();}
+
+    //@Step
+    //public void clickCartIcon( ){ shoppingCartPageObject.clickCartIcon();}
 
     @Step
-    public void clickAddToCart( ){ shoppingCartPageObject.clickAddToCart(300);}
+    public void verifyCartPage() {shoppingCartPageObject.verifyCartPage();}
 
     @Step
-    public void verifyAddToCartMessage( ){ shoppingCartPageObject.verifyAddToCartMessage("Product successfully added to your shopping cart");}
+    public  void verifyPriceWithQuantity(){shoppingCartPageObject.verifyPriceWithQuantity();}
+    @Step
+    public  void checkTotalPriceOfAllItems(){shoppingCartPageObject.checkTotalPriceOfAllItems();}
 
     @Step
-    public void clickContinueShoppingButton( ){ shoppingCartPageObject.clickContinueShoppingButton();}
+    public void clickIncreaseButton(){shoppingCartPageObject.clickIncreaseButton();}
 
     @Step
-    public void enterQuantityAgain( ){ shoppingCartPageObject.enterQuantityAgain(300);}
+    public void deleteItem(){shoppingCartPageObject.deleteItem();}
 
     @Step
-    public void  notifyMeWhenAvailable( ){ shoppingCartPageObject. notifyMeWhenAvailable();}
-
-    @Step
-    public void  clickHomeTab( ){ shoppingCartPageObject. clickHomeTab();}
-
-    @Step
-    public void  selectDifferentProduct( ){ shoppingCartPageObject. selectDifferentProduct();}
-
-    @Step
-    public void  verifyUnsuccessfulReorder( ){ shoppingCartPageObject. verifyUnsuccessfulReorder();}
+    public void  makeQuantityZero(){shoppingCartPageObject. makeQuantityZero();}
 }
+
