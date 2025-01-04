@@ -12,6 +12,11 @@ public class ShoppingCartPage {
     public void verifyShoppingCartPage(){shoppingCartPageObject.verifyShoppingCartPage();}
 
     @Step
+    public boolean booleanVerifyShoppingCartPage(){return shoppingCartPageObject.booleanVerifyShoppingCartPage();}
+
+
+
+    @Step
     public void clickProceedToCheckout(){shoppingCartPageObject.clickProceedToCheckout();}
 
     @Step
@@ -44,4 +49,6 @@ public class ShoppingCartPage {
     @Step
     public void  selectDifferentProduct( ){ shoppingCartPageObject. selectDifferentProduct();}
 
+    @Step
+    public void  verifyUnsuccessfulReorder( ){ shoppingCartPageObject. verifyUnsuccessfulReorder();}
 }

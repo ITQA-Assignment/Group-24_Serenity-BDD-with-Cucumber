@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 public class TestHelper {
 
     private static TestHelper instance;
-    private final WebDriver driver;
+    public final WebDriver driver;
     private final FluentWait<WebDriver> fluentWait;
     private static final int ELEMENT_WAIT_TIMEOUT = 20;
 
